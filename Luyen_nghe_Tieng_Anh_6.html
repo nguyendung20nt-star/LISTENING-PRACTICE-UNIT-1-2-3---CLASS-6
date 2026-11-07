@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luyện nghe & Phát âm Tiếng Anh 6</title>
+<style>
+:root{--navy:#1F4E79;--teal:#0f8b8d;--bg:#f3f7fb;--card:#fff;--line:#d9e2ec;--ok:#1e8e3e;--okbg:#e6f4ea;--bad:#c5221f;--badbg:#fce8e6;--muted:#5f6b7a;--sel:#e3f0ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:#1d2733;font-size:17px;line-height:1.45}
+header{background:var(--navy);color:#fff;padding:14px 16px}
+header h1{margin:0;font-size:20px}
+header .sub{opacity:.85;font-size:14px}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+h2{font-size:18px;margin:0 0 6px;color:var(--navy)}
+.muted{color:var(--muted);font-size:14px}
+label.f{display:block;font-weight:600;margin:10px 0 4px}
+input[type=text]{width:100%;padding:11px 12px;font-size:17px;border:1.5px solid #b8c4d1;border-radius:10px}
+input[type=text]:focus{outline:none;border-color:var(--teal)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:11px 16px;font-size:16px;font-weight:600;cursor:pointer;background:var(--teal);color:#fff;margin:4px 6px 4px 0}
+.btn.alt{background:#e8eef5;color:var(--navy)}
+.btn.red{background:#d93025}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+.tests button{padding:18px 10px;font-size:18px}
+.err{color:var(--bad);font-size:14px;min-height:18px}
+.player{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#eef5fb;border-radius:10px;padding:8px 10px;margin:8px 0 12px}
+.player .btn{margin:0;padding:8px 12px;font-size:15px}
+.bar{flex:1;min-width:120px;height:8px;background:#cfdbe7;border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal)}
+.time{font-size:13px;color:var(--muted);min-width:76px;text-align:right}
+.q{border:1.5px solid transparent;border-radius:10px;padding:8px 10px;margin:6px 0}
+.q .qt{font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.opt{border:1.5px solid #b8c4d1;border-radius:9px;padding:7px 12px;cursor:pointer;background:#fff;user-select:none}
+.opt.on{background:var(--sel);border-color:#3b82f6;font-weight:600}
+.q.ok{border-color:var(--ok);background:var(--okbg)}
+.q.bad{border-color:var(--bad);background:var(--badbg)}
+.mark{font-weight:700;margin-left:6px}
+.q.ok .mark{color:var(--ok)}
+.q.bad .mark{color:var(--bad)}
+.locked .opt,.locked select,.locked input{pointer-events:none}
+.gapin{width:170px!important;display:inline-block;padding:6px 8px!important;font-size:16px!important;margin:0 4px}
+select{font-size:16px;padding:7px 8px;border-radius:8px;border:1.5px solid #b8c4d1;background:#fff}
+.things{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px 14px;background:#fafbfd;border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+.formt{font-weight:700;text-align:center;letter-spacing:.5px;margin:4px 0}
+.submitbar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.score{font-size:30px;font-weight:800;color:var(--navy)}
+.breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px;margin-top:8px}
+.breakdown div{background:#f4f7fb;border-radius:8px;padding:6px 8px;font-size:14px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.modal.show{display:flex}
+.modal .card{max-width:420px}
+.hist{font-size:14px;margin-top:6px}
+.hist div{border-bottom:1px solid #eef1f5;padding:4px 0}
+.hidden{display:none}
+.expl{margin-top:8px;background:#fff8e1;border:1px solid #f2d27a;border-radius:9px;padding:8px 10px;font-size:15px}
+.expl b{color:#8a5a00}
+.expl .qq{font-style:italic;color:#333}
+.spk{border:0;background:#e3f0ff;border-radius:8px;padding:4px 10px;margin-left:8px;cursor:pointer;font-size:15px}
+.opt u{text-decoration-thickness:2px;text-underline-offset:3px}
+.grp{margin-top:14px;font-weight:700;color:var(--navy)}
+.speed{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px}
+.speed button{border:1.5px solid #b8c4d1;background:#fff;border-radius:8px;padding:5px 10px;font-size:14px;cursor:pointer}
+.speed button.on{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
+.lc{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0;background:#fcfdff}
+.lc .ph{font-size:20px;font-weight:700;color:var(--navy)}
+.lc .like{color:#c5221f;font-weight:700;margin-left:6px}
+.lc .ipa{color:var(--muted);margin-left:6px}
+.lc .ex{font-style:italic;margin-top:2px}
+.dictin{width:100%;padding:9px 10px;font-size:17px;border:1.5px solid #b8c4d1;border-radius:9px;margin-top:6px}
+.wfb{margin-top:6px;font-size:16px}
+.wfb span{display:inline-block;margin:2px 3px 0 0;padding:1px 6px;border-radius:6px}
+.wfb .g{background:#d8f0de;color:#145c2a}.wfb .x{background:#fbd5d2;color:#8c1d18;text-decoration:line-through}
+.wfb .m{color:#8c1d18;font-size:14px;margin-left:4px}
+@media (max-width:560px){body{font-size:16px}.gapin{width:130px!important}}
+</style>
+</head>
+<body>
+<header><h1>🎧 Luyện nghe &amp; Phát âm – Tiếng Anh 6 (Unit 1–3)</h1><div class="sub">D&amp;T Academy • My new school • My house • My friends</div></header>
+
+<div class="wrap" id="start">
+  <div class="card">
+    <h2>Thông tin học sinh</h2>
+    <label class="f" for="nm">Họ và tên</label>
+    <input type="text" id="nm" autocomplete="name" placeholder="Ví dụ: Nguyễn Linh Đan">
+    <label class="f" for="cl">Lớp</label>
+    <input type="text" id="cl" placeholder="Ví dụ: 6A">
+    <div class="err" id="err"></div>
+    <div class="grp">🎧 Luyện nghe</div>
+    <div class="tests" id="listenBtns"></div>
+    <p class="muted">Mỗi bài nghe chỉ được nghe tối đa 2 lượt và không tua được. Hãy đọc kỹ câu hỏi trước khi bấm nghe.</p>
+    <div class="grp">🗣️ Phát âm (Phonetics)</div>
+    <div class="tests" id="phonBtns"></div>
+    <p class="muted">Bấm 🔊 để nghe 4 từ của mỗi câu (nghe bao nhiêu lần cũng được).</p>
+    <div class="grp">🔗 Nối âm &amp; Chính tả</div>
+    <div class="tests" id="linkBtns"></div>
+    <p class="muted">Học 20 cụm nối âm hay gặp trong bài nghe, sau đó luyện nghe và viết lại cả câu.</p>
+  </div>
+  <div class="card" id="histCard"><h2>Lịch sử làm bài trên máy này</h2><div class="hist" id="hist"></div></div>
+</div>
+
+<div class="wrap hidden" id="quiz">
+  <div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <div><h2 id="qTitle"></h2><div class="muted" id="qWho"></div>
+      <div class="speed" id="speed"><span>Tốc độ nghe:</span></div></div>
+    <button class="btn alt" id="backBtn">← Chọn bài khác</button>
+  </div>
+  <div id="result" class="card hidden"></div>
+  <div id="exs"></div>
+</div>
+<div class="submitbar hidden" id="sbar">
+  <span id="progress" class="muted"></span>
+  <span>
+    <button class="btn" id="submitBtn">Nộp bài</button>
+    <button class="btn alt hidden" id="redoWrong">Làm lại câu sai</button>
+    <button class="btn alt hidden" id="redoAll">Làm lại từ đầu</button>
+  </span>
+</div>
+
+<div class="modal" id="modal"><div class="card"><p id="mText"></p>
+  <button class="btn" id="mYes">Nộp bài</button><button class="btn alt" id="mNo">Làm tiếp</button></div></div>
+
+<script id="data" type="application/json">[{"group": "listen", "name": "Luyện nghe – Đề 2", "short": "Đề 2", "exercises": [{"no": 1, "type": "tf", "title": "Listen to Jack talking about his first day at school. Write T (True) or F (False).", "audio": "Listening_De2_Bai1.mp3", "qs": [{"text": "Jack's school is very big.", "ans": "F", "expl": {"ans": "F (False)", "quote": "My school is not very big, but it is very beautiful.", "vi": "Trường của Jack không lớn."}}, {"text": "There is a garden at Jack's school.", "ans": "T", "expl": {"ans": "T (True)", "quote": "It has a garden with lots of trees.", "vi": "Trường có một khu vườn."}}, {"text": "Jack is in class 6C.", "ans": "T", "expl": {"ans": "T (True)", "quote": "I'm in class 6C.", "vi": "Jack học lớp 6C."}}, {"text": "There are twenty-three students in Jack's class.", "ans": "F", "expl": {"ans": "F (False)", "quote": "There are thirty-two students in my class.", "vi": "Lớp có 32 (thirty-two) bạn, không phải 23."}}, {"text": "Jack's favourite subject is English.", "ans": "F", "expl": {"ans": "F (False)", "quote": "We have English every day, and my favourite subject is History.", "vi": "Jack học tiếng Anh mỗi ngày nhưng môn yêu thích là Lịch sử."}}]}, {"no": 2, "type": "tf", "title": "Listen to Emma and Huy talking about Huy's grandparents' house. Write T (True) or F (False).", "audio": "Listening_De2_Bai2.mp3", "qs": [{"text": "Huy's grandparents live in a flat.", "ans": "F", "expl": {"ans": "F (False)", "quote": "They live in a country house in Da Lat.", "vi": "Ông bà Huy sống ở nhà vùng quê, không phải căn hộ."}}, {"text": "There are four bedrooms in the house.", "ans": "T", "expl": {"ans": "T (True)", "quote": "There are four bedrooms.", "vi": "Có 4 phòng ngủ."}}, {"text": "Huy likes the kitchen best.", "ans": "F", "expl": {"ans": "F (False)", "quote": "What do you like best about the house? – The garden.", "vi": "Huy thích khu vườn nhất, không phải nhà bếp."}}, {"text": "Huy's grandmother waters the plants every morning.", "ans": "T", "expl": {"ans": "T (True)", "quote": "My grandmother waters them every morning.", "vi": "Bà tưới rau và hoa mỗi sáng."}}, {"text": "Huy visits his grandparents every winter.", "ans": "F", "expl": {"ans": "F (False)", "quote": "I visit them every summer.", "vi": "Huy về thăm ông bà vào mùa hè, không phải mùa đông."}}]}, {"no": 3, "type": "mcq", "title": "Listen to five short conversations. Choose the correct answer A, B or C.", "audio": "Listening_De2_Bai3.mp3", "qs": [{"text": "Where is Ngoc's ruler?", "opts": ["on her desk", "in her schoolbag", "under her desk"], "ans": 0, "expl": {"ans": "A. on her desk", "quote": "It's on my desk, next to my pencil case.", "vi": "Ngọc nói cây thước không ở trong cặp mà ở trên bàn."}}, {"text": "What is Kien's favourite subject?", "opts": ["Maths", "Music", "English"], "ans": 1, "expl": {"ans": "B. Music", "quote": "Music is my favourite!", "vi": "Kiên học cả Toán, tiếng Anh, Âm nhạc nhưng thích Âm nhạc nhất."}}, {"text": "How does Thu go to school today?", "opts": ["by car", "on foot", "by bike"], "ans": 0, "expl": {"ans": "A. by car", "quote": "I usually walk. But today it's raining, so my dad is taking me by car.", "vi": "Thu thường đi bộ, nhưng hôm nay trời mưa nên đi ô tô."}}, {"text": "Which room is Sam in?", "opts": ["the living room", "the bedroom", "the kitchen"], "ans": 2, "expl": {"ans": "C. the kitchen", "quote": "I'm in the kitchen, Mum. I'm making a sandwich.", "vi": "Sam đang ở trong bếp."}}, {"text": "What does Bao's brother look like?", "opts": ["He is short and has long hair.", "He is tall and has long hair.", "He is tall and has a round face."], "ans": 2, "expl": {"ans": "C. He is tall and has a round face.", "quote": "He's the tall boy … He has short hair and a round face.", "vi": "Anh của Bảo cao, tóc ngắn, mặt tròn."}}]}, {"no": 4, "type": "mcq", "title": "Listen to Trang talking about her bedroom. Choose the correct answer A, B or C.", "audio": "Listening_De2_Bai4.mp3", "qs": [{"text": "What is Trang's bedroom like?", "opts": ["big and dark", "small and messy", "bright and tidy"], "ans": 2, "expl": {"ans": "C. bright and tidy", "quote": "It isn't very big, but it's bright and tidy.", "vi": "Phòng sáng sủa và gọn gàng."}}, {"text": "Where is the bed?", "opts": ["next to the window", "in the corner", "next to the door"], "ans": 0, "expl": {"ans": "A. next to the window", "quote": "There's a bed next to the window and a small desk in the corner.", "vi": "Cái giường ở cạnh cửa sổ; cái bàn mới ở trong góc."}}, {"text": "What is on the bookshelf?", "opts": ["photos", "toys", "comics"], "ans": 2, "expl": {"ans": "C. comics", "quote": "There's a bookshelf above the desk with lots of comics on it.", "vi": "Trên giá sách có nhiều truyện tranh."}}, {"text": "Where does Mimi often sleep?", "opts": ["under the bed", "on the bed", "on the desk"], "ans": 0, "expl": {"ans": "A. under the bed", "quote": "My cat, Mimi, often sleeps under my bed.", "vi": "Mimi ngủ dưới gầm giường."}}, {"text": "Why does Trang love her bedroom?", "opts": ["It's big.", "It's quiet.", "It has a TV."], "ans": 1, "expl": {"ans": "B. It's quiet.", "quote": "I love my bedroom because it's quiet.", "vi": "Từ \"because\" cho biết lý do: phòng yên tĩnh."}}]}, {"no": 5, "type": "gap", "title": "Listen to Mr Brown talking about Sports Day. Write ONE word or a number in each gap.", "audio": "Listening_De2_Bai5.mp3", "qs": [{"label": "Day:", "before": "", "after": "", "accept": ["saturday"], "expl": {"ans": "Saturday", "quote": "Our school Sports Day is on Saturday.", "vi": ""}}, {"label": "Date:", "before": "the", "after": "of November", "accept": ["12th", "twelfth"], "expl": {"ans": "twelfth / 12th", "quote": "… the twelfth of November.", "vi": "the twelfth = ngày 12. Viết twelfth hoặc 12th."}}, {"label": "Start time:", "before": "", "after": "a.m.", "accept": ["8", "8 am", "8 o'clock", "8.00", "8:00", "8am", "eight", "eight o'clock"], "expl": {"ans": "8 / eight o'clock", "quote": "It starts at eight o'clock in the morning.", "vi": "8 giờ sáng."}}, {"label": "Meet in the school:", "before": "", "after": "", "accept": ["hall"], "expl": {"ans": "hall", "quote": "All students meet in the school hall first.", "vi": "hall = hội trường."}}, {"label": "Bring:", "before": "a bottle of", "after": "", "accept": ["water"], "expl": {"ans": "water", "quote": "Please wear your sports uniform and bring a bottle of water.", "vi": "Mang theo một chai nước."}}], "form": "SPORTS DAY"}, {"no": 6, "type": "gap", "title": "Listen to Daisy and Long talking about Long's best friend. Write ONE word or a number in each gap.", "audio": "Listening_De2_Bai6.mp3", "qs": [{"label": "", "before": "Dat is", "after": "years old.", "accept": ["12", "twelve"], "expl": {"ans": "twelve / 12", "quote": "He's twelve years old.", "vi": ""}}, {"label": "", "before": "Dat has black hair and small", "after": ".", "accept": ["eyes"], "expl": {"ans": "eyes", "quote": "He has black hair and small eyes.", "vi": ""}}, {"label": "", "before": "Dat is very", "after": ".", "accept": ["kind"], "expl": {"ans": "kind", "quote": "He's very kind.", "vi": ""}}, {"label": "", "before": "Dat helps Long with his", "after": "homework.", "accept": ["english"], "expl": {"ans": "English", "quote": "He always helps me with my English homework.", "vi": ""}}, {"label": "", "before": "They play", "after": "together every Sunday.", "accept": ["chess"], "expl": {"ans": "chess", "quote": "He likes playing chess.", "vi": "chess = cờ vua."}}]}, {"no": 7, "type": "match", "title": "Listen to An talking about her family on Sunday morning. Match each person (1–5) with what he or she is doing (A–F). There is ONE extra activity.", "audio": "Listening_De2_Bai7.mp3", "qs": [{"text": "Dad", "ans": 3, "expl": {"ans": "D. washing the car", "quote": "My dad isn't watching TV. He's washing the car in front of the house.", "vi": "Bố KHÔNG xem TV mà đang rửa xe – \"watching TV\" là đáp án thừa."}}, {"text": "Mum", "ans": 0, "expl": {"ans": "A. cooking lunch", "quote": "My mum is in the kitchen. She's cooking lunch.", "vi": ""}}, {"text": "Grandma", "ans": 2, "expl": {"ans": "C. reading a newspaper", "quote": "My grandma is sitting in the garden and reading a newspaper.", "vi": ""}}, {"text": "An's brother", "ans": 4, "expl": {"ans": "E. playing computer games", "quote": "My brother is in his room. He's playing computer games.", "vi": ""}}, {"text": "Chi", "ans": 5, "expl": {"ans": "F. watering the flowers", "quote": "And my sister Chi is watering the flowers.", "vi": ""}}], "things": ["cooking lunch", "watching TV", "reading a newspaper", "washing the car", "playing computer games", "watering the flowers"]}, {"no": 8, "type": "match", "title": "Listen to the teacher talking about her students. Match each student (1–5) with the club he or she should join (A–F). There is ONE extra club.", "audio": "Listening_De2_Bai8.mp3", "qs": [{"text": "Kim", "ans": 0, "expl": {"ans": "A. Art Club", "quote": "Kim loves drawing and painting.", "vi": "Thích vẽ → câu lạc bộ Mỹ thuật (Art Club)."}}, {"text": "Hai", "ans": 1, "expl": {"ans": "B. Music Club", "quote": "Hai can play the guitar, and he sings very well.", "vi": "Chơi đàn, hát hay → Music Club."}}, {"text": "Lien", "ans": 4, "expl": {"ans": "E. Science Club", "quote": "Lien likes doing experiments in the lab.", "vi": "Làm thí nghiệm → Science Club."}}, {"text": "Tri", "ans": 2, "expl": {"ans": "C. Football Club", "quote": "Tri plays a sport with a ball … He's a very good goalkeeper.", "vi": "goalkeeper = thủ môn → Football Club."}}, {"text": "Uyen", "ans": 3, "expl": {"ans": "D. English Club", "quote": "Uyen … practises speaking English every week.", "vi": "Luyện nói tiếng Anh → English Club."}}], "things": ["Art Club", "Music Club", "Football Club", "English Club", "Science Club", "Chess Club"]}]}, {"group": "listen", "name": "Luyện nghe – Đề 3", "short": "Đề 3", "exercises": [{"no": 1, "type": "tf", "title": "Listen to Sophie talking about her school day. Write T (True) or F (False).", "audio": "Listening_De3_Bai1.mp3", "qs": [{"text": "Sophie's school day starts at 8:30.", "ans": "T", "expl": {"ans": "T (True)", "quote": "My school day starts at half past eight.", "vi": "half past eight = 8:30."}}, {"text": "Sophie walks to school with her brother.", "ans": "F", "expl": {"ans": "F (False)", "quote": "Every morning, I go to school by bus with my brother.", "vi": "Sophie đi xe buýt, không đi bộ."}}, {"text": "Sophie has Art and PE on Friday.", "ans": "T", "expl": {"ans": "T (True)", "quote": "My favourite day is Friday because I have Art and PE.", "vi": ""}}, {"text": "Sophie usually plays games at break time.", "ans": "F", "expl": {"ans": "F (False)", "quote": "At break time, I usually read books in the library.", "vi": "Giờ ra chơi Sophie đọc sách, không chơi trò chơi."}}, {"text": "Sophie loves Maths.", "ans": "F", "expl": {"ans": "F (False)", "quote": "I don't like Maths very much.", "vi": "Sophie không thích môn Toán lắm."}}]}, {"no": 2, "type": "tf", "title": "Listen to Nhi and Oliver talking about a photo of Oliver's house. Write T (True) or F (False).", "audio": "Listening_De3_Bai2.mp3", "qs": [{"text": "Oliver lives in the city.", "ans": "F", "expl": {"ans": "F (False)", "quote": "It's a small house in the countryside.", "vi": "Nhà ở vùng quê, không phải thành phố."}}, {"text": "Oliver's bedroom is upstairs.", "ans": "T", "expl": {"ans": "T (True)", "quote": "It's upstairs.", "vi": "upstairs = ở tầng trên."}}, {"text": "There is a garage next to the house.", "ans": "T", "expl": {"ans": "T (True)", "quote": "That's our garage.", "vi": "Bên cạnh nhà là ga-ra."}}, {"text": "Oliver has two cats.", "ans": "F", "expl": {"ans": "F (False)", "quote": "Yes, we have two dogs.", "vi": "Oliver nuôi 2 con chó, không phải mèo."}}, {"text": "The pets sleep in the living room.", "ans": "F", "expl": {"ans": "F (False)", "quote": "They sleep in the kitchen.", "vi": "Chúng ngủ trong bếp, không phải phòng khách."}}]}, {"no": 3, "type": "mcq", "title": "Listen to five short conversations. Choose the correct answer A, B or C.", "audio": "Listening_De3_Bai3.mp3", "qs": [{"text": "What doesn't Khoa have today?", "opts": ["his water bottle", "his lunch box", "his pencil case"], "ans": 0, "expl": {"ans": "A. his water bottle", "quote": "Oh no! I don't have my water bottle.", "vi": "Khoa có sách, hộp bút, hộp cơm nhưng quên chai nước."}}, {"text": "When is Yen's English lesson?", "opts": ["on Wednesday morning", "on Thursday afternoon", "on Wednesday afternoon"], "ans": 2, "expl": {"ans": "C. on Wednesday afternoon", "quote": "It's on Wednesday afternoon, at two o'clock.", "vi": ""}}, {"text": "Where are Hieu's shoes?", "opts": ["under the bed", "behind the door", "next to the sofa"], "ans": 1, "expl": {"ans": "B. behind the door", "quote": "They aren't under your bed. They're behind the door.", "vi": "Mẹ nói giày KHÔNG ở dưới giường mà ở sau cánh cửa."}}, {"text": "What is Khoa's new classmate like?", "opts": ["confident", "shy", "lazy"], "ans": 0, "expl": {"ans": "A. confident", "quote": "No, she isn't. She's very confident. She talks to everyone.", "vi": "Bạn ấy không nhút nhát (shy) mà tự tin (confident)."}}, {"text": "What is Son's father doing?", "opts": ["watering the flowers", "cleaning the garage", "planting trees"], "ans": 2, "expl": {"ans": "C. planting trees", "quote": "He's in the garden. He's planting some trees.", "vi": "planting trees = trồng cây."}}]}, {"no": 4, "type": "mcq", "title": "Listen to Hanh talking about her English teacher. Choose the correct answer A, B or C.", "audio": "Listening_De3_Bai4.mp3", "qs": [{"text": "What does Mr Binh look like?", "opts": ["old and short", "young and tall", "young and short"], "ans": 1, "expl": {"ans": "B. young and tall", "quote": "He is young and tall, and he has short black hair.", "vi": ""}}, {"text": "What is Mr Binh like?", "opts": ["strict and serious", "shy and quiet", "friendly and patient"], "ans": 2, "expl": {"ans": "C. friendly and patient", "quote": "He is very friendly and patient.", "vi": "patient = kiên nhẫn."}}, {"text": "What do the students often do in his lessons?", "opts": ["sing songs and play games", "watch films", "write stories"], "ans": 0, "expl": {"ans": "A. sing songs and play games", "quote": "In his lessons, we often sing songs and play games.", "vi": ""}}, {"text": "When does Mr Binh teach the English club?", "opts": ["on Thursdays", "on Tuesdays", "on Saturdays"], "ans": 1, "expl": {"ans": "B. on Tuesdays", "quote": "… he teaches the English club on Tuesdays.", "vi": ""}}, {"text": "What does Mr Binh like doing?", "opts": ["reading and travelling", "cooking and singing", "drawing and swimming"], "ans": 0, "expl": {"ans": "A. reading and travelling", "quote": "He likes reading and travelling.", "vi": ""}}]}, {"no": 5, "type": "gap", "title": "Listen to Mrs White talking about the school library. Write ONE word or a number in each gap.", "audio": "Listening_De3_Bai5.mp3", "qs": [{"label": "Open:", "before": "Monday to", "after": "", "accept": ["friday"], "expl": {"ans": "Friday", "quote": "The library is open from Monday to Friday.", "vi": ""}}, {"label": "Opening time:", "before": "", "after": "a.m.", "accept": ["7", "7 o'clock", "7.00", "7:00", "seven", "seven o'clock"], "expl": {"ans": "7:00 / seven o'clock", "quote": "It opens at seven o'clock in the morning …", "vi": "Viết 7:00 hoặc seven o'clock."}}, {"label": "Closing time:", "before": "", "after": "p.m.", "accept": ["5.15", "5:15", "a quarter past 5", "a quarter past five", "five fifteen", "quarter past 5", "quarter past five"], "expl": {"ans": "5:15 / a quarter past five", "quote": "… and closes at a quarter past five in the afternoon.", "vi": "a quarter past five = 5 giờ 15 (5:15)."}}, {"label": "You can borrow:", "before": "", "after": "books for one week", "accept": ["2", "two"], "expl": {"ans": "two / 2", "quote": "You can borrow two books for one week.", "vi": ""}}, {"label": "Computer corner:", "before": "on the", "after": "floor", "accept": ["2nd", "second"], "expl": {"ans": "second / 2nd", "quote": "Our new computer corner is on the second floor.", "vi": "second = thứ hai (tầng 2)."}}], "form": "SCHOOL LIBRARY"}, {"no": 6, "type": "gap", "title": "Listen to Kate and Jim talking about Jim's new classroom. Write ONE word or a number in each gap.", "audio": "Listening_De3_Bai6.mp3", "qs": [{"label": "", "before": "Jim's classroom is on the", "after": "floor.", "accept": ["3rd", "third"], "expl": {"ans": "third / 3rd", "quote": "It's on the third floor.", "vi": "third = thứ ba (tầng 3)."}}, {"label": "", "before": "There are", "after": "students in Jim's class.", "accept": ["35", "thirty five", "thirty-five"], "expl": {"ans": "thirty-five / 35", "quote": "There are thirty-five students.", "vi": "thirty-five = 35."}}, {"label": "", "before": "There is a big whiteboard, a TV and two", "after": ".", "accept": ["fans"], "expl": {"ans": "fans", "quote": "There's a big whiteboard, a TV and two fans.", "vi": "fans = quạt."}}, {"label": "", "before": "There is a", "after": "of the world on the wall.", "accept": ["map"], "expl": {"ans": "map", "quote": "There's also a map of the world on the wall.", "vi": "map = bản đồ."}}, {"label": "", "before": "Mrs Lee teaches", "after": ".", "accept": ["geography"], "expl": {"ans": "Geography", "quote": "She teaches us Geography.", "vi": "Geography = môn Địa lý."}}]}, {"no": 7, "type": "match", "title": "Listen to Tien talking about a photo of her family. Match each person (1–5) with what he or she looks like (A–F). There is ONE extra description.", "audio": "Listening_De3_Bai7.mp3", "qs": [{"text": "Grandpa", "ans": 0, "expl": {"ans": "A. white hair and glasses", "quote": "My grandpa has white hair, and he wears glasses.", "vi": ""}}, {"text": "Dad", "ans": 2, "expl": {"ans": "C. very tall with short hair", "quote": "My dad is very tall, and he has short hair.", "vi": ""}}, {"text": "Aunt Hue", "ans": 1, "expl": {"ans": "B. long curly hair", "quote": "Aunt Hue has long curly hair.", "vi": "curly = xoăn (không phải straight = thẳng)."}}, {"text": "Cousin Toan", "ans": 4, "expl": {"ans": "E. a moustache", "quote": "My cousin Toan doesn't have long hair. He has a moustache now.", "vi": "moustache = ria mép."}}, {"text": "Baby Bi", "ans": 3, "expl": {"ans": "D. big round eyes and chubby cheeks", "quote": "And baby Bi has big round eyes and chubby cheeks.", "vi": "chubby cheeks = má phúng phính."}}], "things": ["white hair and glasses", "long curly hair", "very tall with short hair", "big round eyes and chubby cheeks", "a moustache", "long straight hair"]}, {"no": 8, "type": "match", "title": "Listen to Vinh talking about his friends at break time. Match each friend (1–5) with the place he or she is in (A–F). There is ONE extra place.", "audio": "Listening_De3_Bai8.mp3", "qs": [{"text": "Ly", "ans": 0, "expl": {"ans": "A. the library", "quote": "Ly is borrowing some books.", "vi": "Mượn sách → ở thư viện."}}, {"text": "Quan", "ans": 1, "expl": {"ans": "B. the canteen", "quote": "Quan is hungry, so he's buying a sandwich and some milk.", "vi": "Mua đồ ăn → ở căng tin."}}, {"text": "Tung", "ans": 3, "expl": {"ans": "D. the playground", "quote": "Tung is playing football with his classmates.", "vi": "Đá bóng → ở sân chơi."}}, {"text": "Ngan", "ans": 2, "expl": {"ans": "C. the computer room", "quote": "Ngan isn't in the music room today. She's using a computer …", "vi": "Ngân KHÔNG ở phòng nhạc mà ở phòng máy tính."}}, {"text": "Dung", "ans": 4, "expl": {"ans": "E. the music room", "quote": "And Dung is practising the piano for the school concert.", "vi": "Tập đàn piano → ở phòng nhạc."}}], "things": ["the library", "the canteen", "the computer room", "the playground", "the music room", "the art room"]}]}, {"group": "phon", "name": "Unit 1: My new school – Âm /ɑː/ và /ʌ/", "short": "Unit 1", "exercises": [{"no": 1, "type": "phon", "title": "Choose the word whose underlined part is pronounced differently from the other three.", "qs": [{"opts": ["s[u]bject", "h[u]ngry", "l[u]nch", "calc[u]lator"], "ans": 3, "audio": "U1_E1_Q01.mp3", "expl": {"ans": "D. calculator", "quote": "subject /ʌ/ · hungry /ʌ/ · lunch /ʌ/ · calculator /jʊ/", "vi": ""}}, {"opts": ["st[u]dy", "comp[u]ter", "[u]nderstand", "s[u]nny"], "ans": 1, "audio": "U1_E1_Q02.mp3", "expl": {"ans": "B. computer", "quote": "study /ʌ/ · computer /juː/ · understand /ʌ/ · sunny /ʌ/", "vi": ""}}, {"opts": ["h[u]sband", "st[u]dy", "[u]ncle", "t[u]rn"], "ans": 3, "audio": "U1_E1_Q03.mp3", "expl": {"ans": "D. turn", "quote": "husband /ʌ/ · study /ʌ/ · uncle /ʌ/ · turn /ɜː/", "vi": "\"ur\" đọc là /ɜː/."}}, {"opts": ["l[a]rge", "sh[a]rpener", "h[a]t", "st[a]r"], "ans": 2, "audio": "U1_E1_Q04.mp3", "expl": {"ans": "C. hat", "quote": "large /ɑː/ · sharpener /ɑː/ · hat /æ/ · star /ɑː/", "vi": "\"ar\" đọc /ɑː/; \"a\" trong hat đọc /æ/."}}, {"opts": ["cl[a]ssmate", "comp[a]ss", "sm[a]rt", "f[a]st"], "ans": 1, "audio": "U1_E1_Q05.mp3", "expl": {"ans": "B. compass", "quote": "classmate /ɑː/ · compass /ə/ · smart /ɑː/ · fast /ɑː/", "vi": "compass /ˈkʌmpəs/: âm không nhấn đọc /ə/."}}, {"opts": ["[u]niform", "s[u]mmer", "st[u]dent", "comp[u]ter"], "ans": 1, "audio": "U1_E1_Q06.mp3", "expl": {"ans": "B. summer", "quote": "uniform /juː/ · summer /ʌ/ · student /juː/ · computer /juː/", "vi": ""}}, {"opts": ["c[ou]ntry", "gr[ou]p", "y[ou]ng", "d[ou]ble"], "ans": 1, "audio": "U1_E1_Q07.mp3", "expl": {"ans": "B. group", "quote": "country /ʌ/ · group /uː/ · young /ʌ/ · double /ʌ/", "vi": ""}}, {"opts": ["cl[a]ss", "f[a]st", "d[a]ncing", "libr[a]ry"], "ans": 3, "audio": "U1_E1_Q08.mp3", "expl": {"ans": "D. library", "quote": "class /ɑː/ · fast /ɑː/ · dancing /ɑː/ · library /ə/", "vi": "library /ˈlaɪbrəri/."}}, {"opts": ["cl[e]ver", "subj[e]ct", "r[e]staurant", "[E]nglish"], "ans": 3, "audio": "U1_E1_Q09.mp3", "expl": {"ans": "D. English", "quote": "clever /e/ · subject /e/ · restaurant /e/ · English /ɪ/", "vi": "English /ˈɪŋɡlɪʃ/."}}, {"opts": ["c[a]lculator", "c[a]r", "f[a]st", "f[a]ther"], "ans": 0, "audio": "U1_E1_Q10.mp3", "expl": {"ans": "A. calculator", "quote": "calculator /æ/ · car /ɑː/ · fast /ɑː/ · father /ɑː/", "vi": ""}}, {"opts": ["br[o]ther", "v[o]lleyball", "c[o]mpany", "M[o]nday"], "ans": 1, "audio": "U1_E1_Q11.mp3", "expl": {"ans": "B. volleyball", "quote": "brother /ʌ/ · volleyball /ɒ/ · company /ʌ/ · Monday /ʌ/", "vi": ""}}, {"opts": ["sm[ar]t", "doll[ar]", "st[ar]t", "guit[ar]"], "ans": 1, "audio": "U1_E1_Q12.mp3", "expl": {"ans": "B. dollar", "quote": "smart /ɑː/ · dollar /ə/ · start /ɑː/ · guitar /ɑː/", "vi": "dollar /ˈdɒlə/: âm cuối không nhấn đọc /ə/."}}, {"opts": ["[u]niform", "S[u]nday", "m[u]sic", "[u]nique"], "ans": 1, "audio": "U1_E1_Q13.mp3", "expl": {"ans": "B. Sunday", "quote": "uniform /juː/ · Sunday /ʌ/ · music /juː/ · unique /juː/", "vi": ""}}, {"opts": ["n[o]tebook", "[o]ver", "c[o]ver", "vide[o]"], "ans": 2, "audio": "U1_E1_Q14.mp3", "expl": {"ans": "C. cover", "quote": "notebook /əʊ/ · over /əʊ/ · cover /ʌ/ · video /əʊ/", "vi": "cover /ˈkʌvə/."}}, {"opts": ["M[ar]ch", "sm[ar]t", "w[ar]m", "[ar]t"], "ans": 2, "audio": "U1_E1_Q15.mp3", "expl": {"ans": "C. warm", "quote": "March /ɑː/ · smart /ɑː/ · warm /ɔː/ · art /ɑː/", "vi": "Sau \"w\", \"ar\" thường đọc /ɔː/ (warm, war)."}}, {"opts": ["st[u]dy", "l[u]nch", "s[u]n", "comp[u]ter"], "ans": 3, "audio": "U1_E1_Q16.mp3", "expl": {"ans": "D. computer", "quote": "study /ʌ/ · lunch /ʌ/ · sun /ʌ/ · computer /juː/", "vi": ""}}, {"opts": ["gramm[ar]", "st[ar]", "h[ar]d", "st[ar]t"], "ans": 0, "audio": "U1_E1_Q17.mp3", "expl": {"ans": "A. grammar", "quote": "grammar /ə/ · star /ɑː/ · hard /ɑː/ · start /ɑː/", "vi": "grammar /ˈɡræmə/."}}, {"opts": ["c[o]me", "s[o]meone", "br[o]ther", "v[o]lleyball"], "ans": 3, "audio": "U1_E1_Q18.mp3", "expl": {"ans": "D. volleyball", "quote": "come /ʌ/ · someone /ʌ/ · brother /ʌ/ · volleyball /ɒ/", "vi": ""}}, {"opts": ["m[o]ther", "n[o]", "M[o]nday", "l[o]ve"], "ans": 1, "audio": "U1_E1_Q19.mp3", "expl": {"ans": "B. no", "quote": "mother /ʌ/ · no /əʊ/ · Monday /ʌ/ · love /ʌ/", "vi": ""}}, {"opts": ["s[u]bject", "st[u]dy", "f[u]n", "comp[u]ter"], "ans": 3, "audio": "U1_E1_Q20.mp3", "expl": {"ans": "D. computer", "quote": "subject /ʌ/ · study /ʌ/ · fun /ʌ/ · computer /juː/", "vi": ""}}]}, {"no": 2, "type": "phon", "title": "Choose the word that has the main stress in a different position from the other three.", "qs": [{"opts": ["physics", "lesson", "judo", "exciting"], "ans": 3, "audio": "U1_E2_Q01.mp3", "expl": {"ans": "D. exciting", "quote": "PHY-sics (âm 1) · LES-son (âm 1) · JU-do (âm 1) · ex-CI-ting (âm 2)", "vi": ""}}, {"opts": ["creative", "equipment", "excited", "uniform"], "ans": 3, "audio": "U1_E2_Q02.mp3", "expl": {"ans": "D. uniform", "quote": "cre-A-tive (âm 2) · e-QUIP-ment (âm 2) · ex-CI-ted (âm 2) · U-ni-form (âm 1)", "vi": ""}}, {"opts": ["international", "kindergarten", "interesting", "calculator"], "ans": 0, "audio": "U1_E2_Q03.mp3", "expl": {"ans": "A. international", "quote": "in-ter-NA-tion-al (âm 3) · KIN-der-gar-ten (âm 1) · IN-te-res-ting (âm 1) · CAL-cu-la-tor (âm 1)", "vi": ""}}, {"opts": ["boarding", "textbook", "around", "history"], "ans": 2, "audio": "U1_E2_Q04.mp3", "expl": {"ans": "C. around", "quote": "BOAR-ding (âm 1) · TEXT-book (âm 1) · a-ROUND (âm 2) · HIS-to-ry (âm 1)", "vi": ""}}, {"opts": ["sometimes", "listen", "canteen", "pocket"], "ans": 2, "audio": "U1_E2_Q05.mp3", "expl": {"ans": "C. canteen", "quote": "SOME-times (âm 1) · LIS-ten (âm 1) · can-TEEN (âm 2) · POC-ket (âm 1)", "vi": ""}}, {"opts": ["interview", "library", "creative", "badminton"], "ans": 2, "audio": "U1_E2_Q06.mp3", "expl": {"ans": "C. creative", "quote": "IN-ter-view (âm 1) · LI-bra-ry (âm 1) · cre-A-tive (âm 2) · BAD-min-ton (âm 1)", "vi": ""}}, {"opts": ["biology", "breakfast", "classroom", "science"], "ans": 0, "audio": "U1_E2_Q07.mp3", "expl": {"ans": "A. biology", "quote": "bi-O-lo-gy (âm 2) · BREAK-fast (âm 1) · CLASS-room (âm 1) · SCI-ence (âm 1)", "vi": ""}}, {"opts": ["remember", "uniform", "secondary", "exercise"], "ans": 0, "audio": "U1_E2_Q08.mp3", "expl": {"ans": "A. remember", "quote": "re-MEM-ber (âm 2) · U-ni-form (âm 1) · SE-con-da-ry (âm 1) · EX-er-cise (âm 1)", "vi": ""}}, {"opts": ["notebook", "supply", "boarding", "pencil"], "ans": 1, "audio": "U1_E2_Q09.mp3", "expl": {"ans": "B. supply", "quote": "NOTE-book (âm 1) · sup-PLY (âm 2) · BOAR-ding (âm 1) · PEN-cil (âm 1)", "vi": ""}}, {"opts": ["surround", "swimming", "compass", "history"], "ans": 0, "audio": "U1_E2_Q10.mp3", "expl": {"ans": "A. surround", "quote": "sur-ROUND (âm 2) · SWIM-ming (âm 1) · COM-pass (âm 1) · HIS-to-ry (âm 1)", "vi": ""}}]}]}, {"group": "phon", "name": "Unit 2: My house – Cách phát âm đuôi -s / -es: /s/, /z/, /ɪz/", "short": "Unit 2", "exercises": [{"no": 1, "type": "phon", "title": "Choose the word whose underlined part is pronounced differently from the other three.", "qs": [{"opts": ["match[es]", "take[s]", "wash[es]", "beach[es]"], "ans": 1, "audio": "U2_E1_Q01.mp3", "expl": {"ans": "B. takes", "quote": "matches /ɪz/ · takes /s/ · washes /ɪz/ · beaches /ɪz/", "vi": "Sau âm /k/ thêm -s đọc /s/; sau /tʃ/, /ʃ/ đọc /ɪz/."}}, {"opts": ["cooker[s]", "table[s]", "bedroom[s]", "carpet[s]"], "ans": 3, "audio": "U2_E1_Q02.mp3", "expl": {"ans": "D. carpets", "quote": "cookers /z/ · tables /z/ · bedrooms /z/ · carpets /s/", "vi": "carpet tận cùng âm /t/ → /s/."}}, {"opts": ["hous[es]", "pictur[es]", "wardrob[es]", "bookshelv[es]"], "ans": 0, "audio": "U2_E1_Q03.mp3", "expl": {"ans": "A. houses", "quote": "houses /ɪz/ · pictures /z/ · wardrobes /z/ · bookshelves /z/", "vi": "house tận cùng âm /s/ → houses đọc /ɪz/."}}, {"opts": ["sink[s]", "lamp[s]", "wall[s]", "clock[s]"], "ans": 2, "audio": "U2_E1_Q04.mp3", "expl": {"ans": "C. walls", "quote": "sinks /s/ · lamps /s/ · walls /z/ · clocks /s/", "vi": "wall tận cùng âm /l/ (hữu thanh) → /z/."}}, {"opts": ["student[s]", "book[s]", "rubber[s]", "subject[s]"], "ans": 2, "audio": "U2_E1_Q05.mp3", "expl": {"ans": "C. rubbers", "quote": "students /s/ · books /s/ · rubbers /z/ · subjects /s/", "vi": ""}}, {"opts": ["read[s]", "cupboard[s]", "watch[es]", "bathroom[s]"], "ans": 2, "audio": "U2_E1_Q06.mp3", "expl": {"ans": "C. watches", "quote": "reads /z/ · cupboards /z/ · watches /ɪz/ · bathrooms /z/", "vi": "watch tận cùng âm /tʃ/ → /ɪz/."}}, {"opts": ["b[a]g", "f[a]mily", "b[a]th", "f[a]n"], "ans": 2, "audio": "U2_E1_Q07.mp3", "expl": {"ans": "C. bath", "quote": "bag /æ/ · family /æ/ · bath /ɑː/ · fan /æ/", "vi": "bath /bɑːθ/ (giọng Anh)."}}, {"opts": ["toilet[s]", "bed[s]", "notebook[s]", "graph[s]"], "ans": 1, "audio": "U2_E1_Q08.mp3", "expl": {"ans": "B. beds", "quote": "toilets /s/ · beds /z/ · notebooks /s/ · graphs /s/", "vi": "bed tận cùng âm /d/ (hữu thanh) → /z/."}}, {"opts": ["attic[s]", "laptop[s]", "chopstick[s]", "kitchen[s]"], "ans": 3, "audio": "U2_E1_Q09.mp3", "expl": {"ans": "D. kitchens", "quote": "attics /s/ · laptops /s/ · chopsticks /s/ · kitchens /z/", "vi": ""}}, {"opts": ["flat[s]", "cupboard[s]", "dishwasher[s]", "window[s]"], "ans": 0, "audio": "U2_E1_Q10.mp3", "expl": {"ans": "A. flats", "quote": "flats /s/ · cupboards /z/ · dishwashers /z/ · windows /z/", "vi": ""}}, {"opts": ["p[o]sters", "ch[o]pstick", "ph[o]to", "wardr[o]be"], "ans": 1, "audio": "U2_E1_Q11.mp3", "expl": {"ans": "B. chopstick", "quote": "posters /əʊ/ · chopstick /ɒ/ · photo /əʊ/ · wardrobe /əʊ/", "vi": ""}}, {"opts": ["chair[s]", "sofa[s]", "room[s]", "sink[s]"], "ans": 3, "audio": "U2_E1_Q12.mp3", "expl": {"ans": "D. sinks", "quote": "chairs /z/ · sofas /z/ · rooms /z/ · sinks /s/", "vi": ""}}, {"opts": ["vas[es]", "fridg[es]", "dish[es]", "tabl[es]"], "ans": 3, "audio": "U2_E1_Q13.mp3", "expl": {"ans": "D. tables", "quote": "vases /ɪz/ · fridges /ɪz/ · dishes /ɪz/ · tables /z/", "vi": "table tận cùng âm /l/ → tables đọc /z/, không phải /ɪz/."}}, {"opts": ["television[s]", "town[s]", "flat[s]", "cupboard[s]"], "ans": 2, "audio": "U2_E1_Q14.mp3", "expl": {"ans": "C. flats", "quote": "televisions /z/ · towns /z/ · flats /s/ · cupboards /z/", "vi": ""}}, {"opts": ["fr[i]dge", "m[i]crowave", "beh[i]nd", "l[i]ghts"], "ans": 0, "audio": "U2_E1_Q15.mp3", "expl": {"ans": "A. fridge", "quote": "fridge /ɪ/ · microwave /aɪ/ · behind /aɪ/ · lights /aɪ/", "vi": ""}}, {"opts": ["lamp[s]", "hall[s]", "desk[s]", "light[s]"], "ans": 1, "audio": "U2_E1_Q16.mp3", "expl": {"ans": "B. halls", "quote": "lamps /s/ · halls /z/ · desks /s/ · lights /s/", "vi": ""}}, {"opts": ["[e]leven", "tel[e]vision", "kitch[e]n", "week[e]nd"], "ans": 3, "audio": "U2_E1_Q17.mp3", "expl": {"ans": "D. weekend", "quote": "eleven /ɪ/ · television /ɪ/ · kitchen /ɪ/ · weekend /e/", "vi": ""}}, {"opts": ["pair[s]", "group[s]", "learner[s]", "kitchen[s]"], "ans": 1, "audio": "U2_E1_Q18.mp3", "expl": {"ans": "B. groups", "quote": "pairs /z/ · groups /s/ · learners /z/ · kitchens /z/", "vi": "group tận cùng âm /p/ → /s/."}}, {"opts": ["cup[s]", "spoon[s]", "fork[s]", "clock[s]"], "ans": 1, "audio": "U2_E1_Q19.mp3", "expl": {"ans": "B. spoons", "quote": "cups /s/ · spoons /z/ · forks /s/ · clocks /s/", "vi": ""}}, {"opts": ["parent[s]", "sister[s]", "brother[s]", "cousin[s]"], "ans": 0, "audio": "U2_E1_Q20.mp3", "expl": {"ans": "A. parents", "quote": "parents /s/ · sisters /z/ · brothers /z/ · cousins /z/", "vi": ""}}]}]}, {"group": "phon", "name": "Unit 3: My friends – Âm /b/ và /p/", "short": "Unit 3", "exercises": [{"no": 1, "type": "phon", "title": "Choose the word whose underlined part is pronounced differently from the other three.", "qs": [{"opts": ["pre[p]are", "a[pp]earance", "cu[p]board", "[p]op"], "ans": 2, "audio": "U3_E1_Q01.mp3", "expl": {"ans": "C. cupboard", "quote": "prepare /p/ · appearance /p/ · cupboard câm · pop /p/", "vi": "cupboard /ˈkʌbəd/: chữ p không đọc."}}, {"opts": ["[p]ig", "chu[bb]y", "[p]in", "[p]ole"], "ans": 1, "audio": "U3_E1_Q02.mp3", "expl": {"ans": "B. chubby", "quote": "pig /p/ · chubby /b/ · pin /p/ · pole /p/", "vi": ""}}, {"opts": ["[b]etter", "bo[bb]y", "[b]irthday", "[p]rovide"], "ans": 3, "audio": "U3_E1_Q03.mp3", "expl": {"ans": "D. provide", "quote": "better /b/ · bobby /b/ · birthday /b/ · provide /p/", "vi": ""}}, {"opts": ["jo[b]", "ta[b]", "[p]en", "neigh[b]or"], "ans": 2, "audio": "U3_E1_Q04.mp3", "expl": {"ans": "C. pen", "quote": "job /b/ · tab /b/ · pen /p/ · neighbor /b/", "vi": ""}}, {"opts": ["air[p]ort", "s[p]eak", "note[b]ook", "s[p]oon"], "ans": 2, "audio": "U3_E1_Q05.mp3", "expl": {"ans": "C. notebook", "quote": "airport /p/ · speak /p/ · notebook /b/ · spoon /p/", "vi": ""}}, {"opts": ["a[b]out", "[p]rofessional", "[b]eautiful", "[b]utterfly"], "ans": 1, "audio": "U3_E1_Q06.mp3", "expl": {"ans": "B. professional", "quote": "about /b/ · professional /p/ · beautiful /b/ · butterfly /b/", "vi": ""}}, {"opts": ["[b]ed", "jo[b]", "[p]ass", "[b]ull"], "ans": 2, "audio": "U3_E1_Q07.mp3", "expl": {"ans": "C. pass", "quote": "bed /b/ · job /b/ · pass /p/ · bull /b/", "vi": ""}}, {"opts": ["[b]an", "[p]et", "[p]each", "[p]ier"], "ans": 0, "audio": "U3_E1_Q08.mp3", "expl": {"ans": "A. ban", "quote": "ban /b/ · pet /p/ · peach /p/ · pier /p/", "vi": ""}}, {"opts": ["[b]at", "[b]eer", "[b]ye", "[p]rize"], "ans": 3, "audio": "U3_E1_Q09.mp3", "expl": {"ans": "D. prize", "quote": "bat /b/ · beer /b/ · bye /b/ · prize /p/", "vi": ""}}, {"opts": ["[b]est", "[p]art", "[p]ie", "[p]en"], "ans": 0, "audio": "U3_E1_Q10.mp3", "expl": {"ans": "A. best", "quote": "best /b/ · part /p/ · pie /p/ · pen /p/", "vi": ""}}, {"opts": ["[b]ow", "[p]ie", "[b]ack", "[b]aby"], "ans": 1, "audio": "U3_E1_Q11.mp3", "expl": {"ans": "B. pie", "quote": "bow /b/ · pie /p/ · back /b/ · baby /b/", "vi": ""}}, {"opts": ["co[p]y", "ha[pp]y", "[b]east", "[p]ull"], "ans": 2, "audio": "U3_E1_Q12.mp3", "expl": {"ans": "C. beast", "quote": "copy /p/ · happy /p/ · beast /b/ · pull /p/", "vi": ""}}, {"opts": ["[p]encil", "[p]ocket", "[b]oy", "[p]ostcard"], "ans": 2, "audio": "U3_E1_Q13.mp3", "expl": {"ans": "C. boy", "quote": "pencil /p/ · pocket /p/ · boy /b/ · postcard /p/", "vi": ""}}, {"opts": ["[p]sychology", "[p]ositive", "[p]atient", "[p]resent"], "ans": 0, "audio": "U3_E1_Q14.mp3", "expl": {"ans": "A. psychology", "quote": "psychology câm · positive /p/ · patient /p/ · present /p/", "vi": "psychology /saɪˈkɒlədʒi/: chữ p đầu không đọc."}}, {"opts": ["[b]rilliant", "[b]arbecue", "clim[b]ing", "neigh[b]or"], "ans": 2, "audio": "U3_E1_Q15.mp3", "expl": {"ans": "C. climbing", "quote": "brilliant /b/ · barbecue /b/ · climbing câm · neighbor /b/", "vi": "climbing /ˈklaɪmɪŋ/: chữ b sau m không đọc (climb, comb, thumb)."}}]}, {"no": 2, "type": "phon", "title": "Choose the word that has the main stress in a different position from the other three.", "qs": [{"opts": ["friendly", "picture", "volleyball", "inside"], "ans": 3, "audio": "U3_E2_Q01.mp3", "expl": {"ans": "D. inside", "quote": "FRIEND-ly (âm 1) · PIC-ture (âm 1) · VOL-ley-ball (âm 1) · in-SIDE (âm 2)", "vi": ""}}, {"opts": ["confident", "interview", "personality", "photo"], "ans": 2, "audio": "U3_E2_Q02.mp3", "expl": {"ans": "C. personality", "quote": "CON-fi-dent (âm 1) · IN-ter-view (âm 1) · per-so-NA-li-ty (âm 3) · PHO-to (âm 1)", "vi": ""}}, {"opts": ["energy", "several", "different", "appliance"], "ans": 3, "audio": "U3_E2_Q03.mp3", "expl": {"ans": "D. appliance", "quote": "EN-er-gy (âm 1) · SE-ve-ral (âm 1) · DIF-fe-rent (âm 1) · ap-PLI-ance (âm 2)", "vi": ""}}, {"opts": ["orphan", "friendly", "appear", "beauty"], "ans": 2, "audio": "U3_E2_Q04.mp3", "expl": {"ans": "C. appear", "quote": "OR-phan (âm 1) · FRIEND-ly (âm 1) · ap-PEAR (âm 2) · BEAU-ty (âm 1)", "vi": ""}}, {"opts": ["respond", "magazine", "suggestion", "creative"], "ans": 1, "audio": "U3_E2_Q05.mp3", "expl": {"ans": "B. magazine", "quote": "re-SPOND (âm 2) · ma-ga-ZINE (âm 3) · sug-GES-tion (âm 2) · cre-A-tive (âm 2)", "vi": ""}}, {"opts": ["beside", "patient", "elbow", "poem"], "ans": 0, "audio": "U3_E2_Q06.mp3", "expl": {"ans": "A. beside", "quote": "be-SIDE (âm 2) · PA-tient (âm 1) · EL-bow (âm 1) · PO-em (âm 1)", "vi": ""}}, {"opts": ["appear", "active", "careful", "curly"], "ans": 0, "audio": "U3_E2_Q07.mp3", "expl": {"ans": "A. appear", "quote": "ap-PEAR (âm 2) · AC-tive (âm 1) · CARE-ful (âm 1) · CUR-ly (âm 1)", "vi": ""}}, {"opts": ["caring", "effect", "clever", "friendly"], "ans": 1, "audio": "U3_E2_Q08.mp3", "expl": {"ans": "B. effect", "quote": "CAR-ing (âm 1) · ef-FECT (âm 2) · CLE-ver (âm 1) · FRIEND-ly (âm 1)", "vi": ""}}, {"opts": ["museum", "invite", "independent", "description"], "ans": 2, "audio": "U3_E2_Q09.mp3", "expl": {"ans": "C. independent", "quote": "mu-SE-um (âm 2) · in-VITE (âm 2) · in-de-PEN-dent (âm 3) · de-SCRIP-tion (âm 2)", "vi": ""}}, {"opts": ["funny", "handy", "tonight", "kindness"], "ans": 2, "audio": "U3_E2_Q10.mp3", "expl": {"ans": "C. tonight", "quote": "FUN-ny (âm 1) · HAN-dy (âm 1) · to-NIGHT (âm 2) · KIND-ness (âm 1)", "vi": ""}}]}]}, {"group": "link", "name": "Nối âm – Connected speech", "short": "Nối âm (20 cụm)", "study": true, "cards": [{"phrase": "There's a", "like": "there-zə", "ipa": "/ðeəzə/", "tip": "Âm /z/ cuối nối sang \"a\"; \"a\" đọc rất nhẹ /ə/.", "ex": "There's a cat under the table.", "slow": "LINK_01_slow.mp3", "nat": "LINK_01_nat.mp3"}, {"phrase": "It's in the", "like": "it-sin-thə", "ipa": "/ɪtsɪnðə/", "tip": "/s/ nối sang \"in\"; \"the\" đọc nhẹ /ðə/.", "ex": "It's in the kitchen.", "slow": "LINK_02_slow.mp3", "nat": "LINK_02_nat.mp3"}, {"phrase": "Look at it", "like": "lu-kə-tit", "ipa": "/lʊkətɪt/", "tip": "Phụ âm cuối nối sang nguyên âm đầu từ sau.", "ex": "Look at it! It's a new bike.", "slow": "LINK_03_slow.mp3", "nat": "LINK_03_nat.mp3"}, {"phrase": "a lot of", "like": "ə-lo-təv", "ipa": "/əlɒtəv/", "tip": "\"of\" đọc nhẹ /əv/ và dính vào \"lot\".", "ex": "There are a lot of books in the library.", "slow": "LINK_04_slow.mp3", "nat": "LINK_04_nat.mp3"}, {"phrase": "What do you", "like": "wɒ-də-yə", "ipa": "/wɒdəjə/", "tip": "\"do you\" đọc rất nhanh và nhẹ /də jə/.", "ex": "What do you do at break time?", "slow": "LINK_05_slow.mp3", "nat": "LINK_05_nat.mp3"}, {"phrase": "Do you have", "like": "də-yə-hæv", "ipa": "/dəjəhæv/", "tip": "\"Do you\" gần như thành một âm.", "ex": "Do you have a ruler?", "slow": "LINK_06_slow.mp3", "nat": "LINK_06_nat.mp3"}, {"phrase": "Can I", "like": "kə-naɪ", "ipa": "/kənaɪ/", "tip": "\"can\" đọc nhẹ /kən/, /n/ nối sang \"I\".", "ex": "Can I borrow your pen?", "slow": "LINK_07_slow.mp3", "nat": "LINK_07_nat.mp3"}, {"phrase": "at the moment", "like": "ət-thə-məʊ-mənt", "ipa": "/ətðəməʊmənt/", "tip": "\"at\" đọc nhẹ /ət/, âm /t/ gần như bị nuốt.", "ex": "She's reading a book at the moment.", "slow": "LINK_08_slow.mp3", "nat": "LINK_08_nat.mp3"}, {"phrase": "next to the", "like": "nek-stə-thə", "ipa": "/nekstəðə/", "tip": "\"to\" đọc nhẹ /tə/; /t/ của next gần như mất.", "ex": "The bathroom is next to the kitchen.", "slow": "LINK_09_slow.mp3", "nat": "LINK_09_nat.mp3"}, {"phrase": "in front of", "like": "in-frʌn-təv", "ipa": "/ɪnfrʌntəv/", "tip": "/t/ nối sang \"of\" đọc nhẹ /əv/.", "ex": "There's a garden in front of the house.", "slow": "LINK_10_slow.mp3", "nat": "LINK_10_nat.mp3"}, {"phrase": "get up", "like": "ge-tʌp", "ipa": "/ɡetʌp/", "tip": "/t/ nối sang \"up\".", "ex": "I get up at six o'clock.", "slow": "LINK_11_slow.mp3", "nat": "LINK_11_nat.mp3"}, {"phrase": "half past three", "like": "hɑːf-pɑːs-θriː", "ipa": "/hɑːfpɑːsθriː/", "tip": "Âm /t/ của past bị nuốt trước phụ âm.", "ex": "The club starts at half past three.", "slow": "LINK_12_slow.mp3", "nat": "LINK_12_nat.mp3"}, {"phrase": "He's in his room", "like": "hi-zin-hi-zruːm", "ipa": "/hiːzɪnhɪzruːm/", "tip": "/z/ nối sang nguyên âm phía sau.", "ex": "He's in his room.", "slow": "LINK_13_slow.mp3", "nat": "LINK_13_nat.mp3"}, {"phrase": "She has a", "like": "shi-hæ-zə", "ipa": "/ʃiːhæzə/", "tip": "/z/ của has nối sang \"a\".", "ex": "She has a round face.", "slow": "LINK_14_slow.mp3", "nat": "LINK_14_nat.mp3"}, {"phrase": "I'm in", "like": "aɪ-min", "ipa": "/aɪmɪn/", "tip": "/m/ nối sang \"in\".", "ex": "I'm in class six A.", "slow": "LINK_15_slow.mp3", "nat": "LINK_15_nat.mp3"}, {"phrase": "fish and chips", "like": "fi-shən-chips", "ipa": "/fɪʃəntʃɪps/", "tip": "\"and\" đọc nhẹ /ən/, mất âm /d/.", "ex": "I like fish and chips.", "slow": "LINK_16_slow.mp3", "nat": "LINK_16_nat.mp3"}, {"phrase": "Thanks for", "like": "θæŋks-fə", "ipa": "/θæŋksfə/", "tip": "\"for\" đọc nhẹ /fə/.", "ex": "Thanks for your help.", "slow": "LINK_17_slow.mp3", "nat": "LINK_17_nat.mp3"}, {"phrase": "one of my", "like": "wʌ-nəv-maɪ", "ipa": "/wʌnəvmaɪ/", "tip": "/n/ nối sang \"of\" /əv/.", "ex": "Lan is one of my best friends.", "slow": "LINK_18_slow.mp3", "nat": "LINK_18_nat.mp3"}, {"phrase": "What's your", "like": "wɒ-chə", "ipa": "/wɒtʃə/", "tip": "/ts/ + \"your\" thường nghe thành /tʃə/.", "ex": "What's your favourite subject?", "slow": "LINK_19_slow.mp3", "nat": "LINK_19_nat.mp3"}, {"phrase": "Is it", "like": "i-zit", "ipa": "/ɪzɪt/", "tip": "/z/ nối sang \"it\".", "ex": "Is it a big house?", "slow": "LINK_20_slow.mp3", "nat": "LINK_20_nat.mp3"}], "exercises": []}, {"group": "link", "name": "Chính tả – 1", "short": "Chính tả 1", "exercises": [{"no": 1, "type": "dict", "title": "Listen and write the sentence you hear. (Nghe và viết lại cả câu.)", "qs": [{"audio": "DICT1_01.mp3", "text": "There's a sofa in the living room.", "expl": {"ans": "There's a sofa in the living room.", "quote": "There's a /ðeəzə/ (đọc nối: there-zə)", "vi": ""}}, {"audio": "DICT1_02.mp3", "text": "It's in the drawer.", "expl": {"ans": "It's in the drawer.", "quote": "It's in the /ɪtsɪnðə/ (đọc nối: it-sin-thə)", "vi": ""}}, {"audio": "DICT1_03.mp3", "text": "What do you have on Monday?", "expl": {"ans": "What do you have on Monday?", "quote": "What do you /wɒdəjə/ (đọc nối: wɒ-də-yə); Do you have /dəjəhæv/ (đọc nối: də-yə-hæv)", "vi": ""}}, {"audio": "DICT1_04.mp3", "text": "Can I use your dictionary?", "expl": {"ans": "Can I use your dictionary?", "quote": "Can I /kənaɪ/ (đọc nối: kə-naɪ)", "vi": ""}}, {"audio": "DICT1_05.mp3", "text": "She's talking to her friends at the moment.", "expl": {"ans": "She's talking to her friends at the moment.", "quote": "at the moment /ətðəməʊmənt/ (đọc nối: ət-thə-məʊ-mənt)", "vi": ""}}, {"audio": "DICT1_06.mp3", "text": "The library is next to the computer room.", "expl": {"ans": "The library is next to the computer room.", "quote": "next to the /nekstəðə/ (đọc nối: nek-stə-thə)", "vi": ""}}, {"audio": "DICT1_07.mp3", "text": "There's a small garden in front of my house.", "expl": {"ans": "There's a small garden in front of my house.", "quote": "There's a /ðeəzə/ (đọc nối: there-zə); in front of /ɪnfrʌntəv/ (đọc nối: in-frʌn-təv)", "vi": ""}}, {"audio": "DICT1_08.mp3", "text": "I get up at half past six.", "expl": {"ans": "I get up at half past six.", "quote": "get up /ɡetʌp/ (đọc nối: ge-tʌp)", "vi": ""}}, {"audio": "DICT1_09.mp3", "text": "Look at it!", "expl": {"ans": "Look at it!", "quote": "Look at it /lʊkətɪt/ (đọc nối: lu-kə-tit)", "vi": ""}}, {"audio": "DICT1_10.mp3", "text": "Lan is one of my best friends.", "expl": {"ans": "Lan is one of my best friends.", "quote": "one of my /wʌnəvmaɪ/ (đọc nối: wʌ-nəv-maɪ)", "vi": ""}}]}]}, {"group": "link", "name": "Chính tả – 2", "short": "Chính tả 2", "exercises": [{"no": 1, "type": "dict", "title": "Listen and write the sentence you hear. (Nghe và viết lại cả câu.)", "qs": [{"audio": "DICT2_01.mp3", "text": "Is it a new school?", "expl": {"ans": "Is it a new school?", "quote": "Is it /ɪzɪt/ (đọc nối: i-zit)", "vi": ""}}, {"audio": "DICT2_02.mp3", "text": "He's in his bedroom.", "expl": {"ans": "He's in his bedroom.", "quote": "Nghe kỹ các từ đọc nhẹ: a, the, of, to, and.", "vi": ""}}, {"audio": "DICT2_03.mp3", "text": "She has a round face and long hair.", "expl": {"ans": "She has a round face and long hair.", "quote": "She has a /ʃiːhæzə/ (đọc nối: shi-hæ-zə)", "vi": ""}}, {"audio": "DICT2_04.mp3", "text": "There are a lot of trees in the garden.", "expl": {"ans": "There are a lot of trees in the garden.", "quote": "a lot of /əlɒtəv/ (đọc nối: ə-lo-təv)", "vi": ""}}, {"audio": "DICT2_05.mp3", "text": "Do you have a calculator?", "expl": {"ans": "Do you have a calculator?", "quote": "Do you have /dəjəhæv/ (đọc nối: də-yə-hæv)", "vi": ""}}, {"audio": "DICT2_06.mp3", "text": "I'm in the playground with my classmates.", "expl": {"ans": "I'm in the playground with my classmates.", "quote": "I'm in /aɪmɪn/ (đọc nối: aɪ-min)", "vi": ""}}, {"audio": "DICT2_07.mp3", "text": "What's your favourite room?", "expl": {"ans": "What's your favourite room?", "quote": "What's your /wɒtʃə/ (đọc nối: wɒ-chə)", "vi": ""}}, {"audio": "DICT2_08.mp3", "text": "My mum is cooking fish and chips.", "expl": {"ans": "My mum is cooking fish and chips.", "quote": "fish and chips /fɪʃəntʃɪps/ (đọc nối: fi-shən-chips)", "vi": ""}}, {"audio": "DICT2_09.mp3", "text": "Thanks for your help.", "expl": {"ans": "Thanks for your help.", "quote": "Thanks for /θæŋksfə/ (đọc nối: θæŋks-fə)", "vi": ""}}, {"audio": "DICT2_10.mp3", "text": "The club starts at a quarter past four.", "expl": {"ans": "The club starts at a quarter past four.", "quote": "Nghe kỹ các từ đọc nhẹ: a, the, of, to, and.", "vi": ""}}]}]}]</script>
+<script>
+(function(){
+"use strict";
+var TESTS = JSON.parse(document.getElementById("data").textContent);
+var LET = ["A","B","C","D","E","F"];
+var st = {name:"", cls:"", t:-1, ans:{}, locked:{}, tries:{}, submitted:false};
+var audios = [];
+
+function $(id){ return document.getElementById(id); }
+function el(tag, cls, txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!==undefined) e.textContent=txt; return e; }
+function key(e,q){ return e+"_"+q; }
+function norm(s){
+  return String(s||"").toLowerCase().replace(/[’`]/g,"'").replace(/ +([.,!?])/g,"$1")
+    .replace(/[.!?,]+$/,"").replace(/ +/g," ").trim();
+}
+function store(k,v){ try{ localStorage.setItem(k,v); }catch(err){} }
+function load(k){ try{ return localStorage.getItem(k); }catch(err){ return null; } }
+
+/* ---------- start screen ---------- */
+$("nm").value = load("dt_listen_name") || "";
+$("cl").value = load("dt_listen_class") || "";
+TESTS.forEach(function(t,i){
+  var b = el("button","btn",t.short);
+  b.addEventListener("click", function(){ startTest(i); });
+  $(t.group === "phon" ? "phonBtns" : (t.group === "link" ? "linkBtns" : "listenBtns")).appendChild(b);
+});
+function showHist(){
+  var h = []; try{ h = JSON.parse(load("dt_listen_hist")||"[]"); }catch(err){ h=[]; }
+  var box = $("hist"); box.innerHTML = "";
+  if(!h.length){ box.appendChild(el("div","muted","Chưa có lần làm bài nào.")); return; }
+  h.slice(-10).reverse().forEach(function(r){
+    box.appendChild(el("div","", r.date+" – "+r.name+" ("+r.cls+") – "+r.test+": "+r.right+"/"+(r.total||40)+" = "+r.score+" điểm"));
+  });
+}
+showHist();
+
+function startTest(i){
+  var n = $("nm").value.trim(), c = $("cl").value.trim();
+  if(n.length < 2){ $("err").textContent = "Em hãy nhập họ và tên trước khi chọn bài."; $("nm").focus(); return; }
+  if(!c){ $("err").textContent = "Em hãy nhập lớp."; $("cl").focus(); return; }
+  $("err").textContent = "";
+  st.name=n; st.cls=c; st.t=i; st.ans={}; st.locked={}; st.tries={}; st.submitted=false;
+  store("dt_listen_name", n); store("dt_listen_class", c);
+  $("start").classList.add("hidden"); $("quiz").classList.remove("hidden"); $("sbar").classList.remove("hidden");
+  $("qTitle").textContent = TESTS[i].name;
+  $("qWho").textContent = n + " • Lớp " + c;
+  render();
+  window.scrollTo(0,0);
+}
+$("backBtn").addEventListener("click", function(){
+  stopAll();
+  $("quiz").classList.add("hidden"); $("sbar").classList.add("hidden"); $("start").classList.remove("hidden");
+  showHist(); window.scrollTo(0,0);
+});
+
+/* ---------- speed ---------- */
+var RATE = Number(load("dt_listen_rate")) || 1;
+[[0.8,"🐢 Chậm 0.8×"],[0.9,"Vừa 0.9×"],[1,"Chuẩn 1×"],[1.1,"Nhanh 1.1×"],[1.25,"🚀 Rất nhanh 1.25×"]].forEach(function(r){
+  var b = el("button","",r[1]); if(r[0] === RATE) b.classList.add("on");
+  b.addEventListener("click", function(){
+    RATE = r[0]; store("dt_listen_rate", String(RATE));
+    Array.prototype.forEach.call($("speed").querySelectorAll("button"), function(x){ x.classList.remove("on"); });
+    b.classList.add("on");
+    audios.forEach(function(a){ a.playbackRate = RATE; });
+  });
+  $("speed").appendChild(b);
+});
+function prep(a){ a.playbackRate = RATE; a.preservesPitch = true; a.mozPreservesPitch = true; a.webkitPreservesPitch = true; }
+/* ---------- audio player ---------- */
+function stopAll(){ audios.forEach(function(a){ a.pause(); }); }
+function fmt(s){ if(!isFinite(s)) return "0:00"; s=Math.floor(s); return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2); }
+var MAX_PLAYS = 2;            // mỗi bài chỉ được nghe tối đa 2 lượt
+var players = [];
+function player(src){
+  var box = el("div","player");
+  var a = new Audio(); a.preload = "none"; a.src = src; audios.push(a);
+  var used = 0, running = false;
+  var play = el("button","btn","");
+  var bar = el("div","bar"); var fill = el("i"); bar.appendChild(fill);
+  var tm = el("span","time","0:00");
+  var left = el("div","muted","");
+  left.style.width = "100%";
+  function label(){
+    if(running && !a.paused){ play.textContent = "⏸ Tạm dừng"; }
+    else if(running){ play.textContent = "▶ Nghe tiếp"; }
+    else if(used < MAX_PLAYS){ play.textContent = "▶ Nghe lượt " + (used+1) + "/" + MAX_PLAYS; }
+    else { play.textContent = "Đã hết lượt nghe"; }
+    play.disabled = !running && used >= MAX_PLAYS;
+    left.textContent = used >= MAX_PLAYS && !running ? "Em đã nghe đủ " + MAX_PLAYS + " lượt cho bài này." :
+      "Mỗi bài chỉ được nghe " + MAX_PLAYS + " lượt (mỗi lượt đoạn hội thoại được đọc 2 lần). Còn " + (MAX_PLAYS - used) + " lượt.";
+  }
+  play.addEventListener("click", function(){
+    if(running){
+      if(a.paused){ stopAll(); prep(a); var pp = a.play(); if(pp && pp.catch) pp.catch(function(){}); } else { a.pause(); }
+    } else if(used < MAX_PLAYS){
+      stopAll(); used++; running = true; a.currentTime = 0; prep(a); var pp = a.play(); if(pp && pp.catch) pp.catch(function(){});
+    }
+    label();
+  });
+  a.addEventListener("play", label);
+  a.addEventListener("pause", label);
+  a.addEventListener("ended", function(){ running = false; fill.style.width = "100%"; label(); });
+  a.addEventListener("timeupdate", function(){
+    fill.style.width = (a.duration ? 100*a.currentTime/a.duration : 0) + "%";
+    tm.textContent = fmt(a.currentTime) + " / " + fmt(a.duration);
+  });
+  a.addEventListener("error", function(){ running = false; if(used>0) used--; tm.textContent = "Không tải được file nghe"; label(); });
+  players.push({reset: function(){ a.pause(); running = false; used = 0; a.currentTime = 0; fill.style.width = "0"; label(); }});
+  label();
+  box.appendChild(play); box.appendChild(bar); box.appendChild(tm); box.appendChild(left);
+  return box;
+}
+
+/* ---------- render questions ---------- */
+function marked(txt){          // "s[u]bject" -> text with <u>
+  var f = document.createDocumentFragment(), parts = String(txt).split(/[\[\]]/);
+  parts.forEach(function(p, i){ if(!p) return; if(i % 2){ var u = el("u","",p); f.appendChild(u); } else { f.appendChild(document.createTextNode(p)); } });
+  return f;
+}
+var clip = new Audio(); audios.push(clip);
+function speaker(src, label){
+  var b = el("button","spk", label || "🔊 Nghe");
+  b.addEventListener("click", function(){ stopAll(); clip.src = src; clip.currentTime = 0; prep(clip); var pc = clip.play(); if(pc && pc.catch) pc.catch(function(){}); });
+  return b;
+}
+function setAns(k, v){ if(st.locked[k] || st.submitted) return; st.ans[k] = v; updateProgress(); }
+function optGroup(k, labels, values){
+  var g = el("div","opts");
+  labels.forEach(function(lab, idx){
+    var o = el("span","opt");
+    if(typeof lab === "string" && lab.indexOf("[") >= 0){ o.appendChild(marked(lab)); } else { o.textContent = lab; }
+    o.dataset.v = String(values[idx]);
+    o.addEventListener("click", function(){
+      if(st.locked[k] || st.submitted) return;
+      Array.prototype.forEach.call(g.children, function(c){ c.classList.remove("on"); });
+      o.classList.add("on"); setAns(k, values[idx]);
+    });
+    g.appendChild(o);
+  });
+  return g;
+}
+function render(){
+  stopAll(); audios = [clip]; players = [];
+  var host = $("exs"); host.innerHTML = "";
+  $("result").classList.add("hidden");
+  var T = TESTS[st.t];
+  $("sbar").classList.toggle("hidden", !!T.study);
+  if(T.study){
+    var info = el("div","card");
+    info.appendChild(el("h2","","Cách học"));
+    info.appendChild(el("p","","Bấm 🐢 để nghe cụm từ đọc chậm, rồi bấm 🔊 để nghe đọc tự nhiên trong câu. Đọc to theo (nhại theo) 3 lần cho đến khi nói được giống."));
+    host.appendChild(info);
+    var c0 = el("div","card");
+    T.cards.forEach(function(cd, i){
+      var b = el("div","lc");
+      var top = el("div"); top.appendChild(el("span","ph",(i+1)+". "+cd.phrase)); top.appendChild(el("span","like","→ "+cd.like)); top.appendChild(el("span","ipa",cd.ipa));
+      b.appendChild(top);
+      b.appendChild(el("div","muted","💡 "+cd.tip));
+      b.appendChild(el("div","ex","Ví dụ: "+cd.ex));
+      var row = el("div"); row.style.marginTop = "6px";
+      var s1 = speaker(cd.slow, "🐢 Đọc chậm"); s1.style.marginLeft = "0"; row.appendChild(s1); row.appendChild(speaker(cd.nat, "🔊 Đọc tự nhiên"));
+      b.appendChild(row); c0.appendChild(b);
+    });
+    host.appendChild(c0);
+    return;
+  }
+  T.exercises.forEach(function(ex, ei){
+    var c = el("div","card"); c.id = "ex"+ei;
+    c.appendChild(el("h2","", "Bài " + ex.no + ". " + ex.title));
+    if(ex.audio){ c.appendChild(player(ex.audio)); }
+    if(ex.type === "match"){
+      var th = el("div","things");
+      ex.things.forEach(function(t, i){ th.appendChild(el("div","", LET[i] + ". " + t)); });
+      c.appendChild(th);
+    }
+    if(ex.form){ c.appendChild(el("div","formt", ex.form)); }
+    ex.qs.forEach(function(q, qi){
+      var k = key(ei, qi);
+      var d = el("div","q"); d.id = "q_"+k;
+      if(ex.type === "tf"){
+        var t = el("div"); t.appendChild(el("span","qt",(qi+1)+". ")); t.appendChild(document.createTextNode(q.text));
+        t.appendChild(el("span","mark")); d.appendChild(t);
+        d.appendChild(optGroup(k, ["T (True)","F (False)"], ["T","F"]));
+      } else if(ex.type === "mcq"){
+        var t2 = el("div"); t2.appendChild(el("span","qt",(qi+1)+". ")); t2.appendChild(document.createTextNode(q.text));
+        t2.appendChild(el("span","mark")); d.appendChild(t2);
+        d.appendChild(optGroup(k, q.opts.map(function(o,i){ return LET[i]+". "+o; }), q.opts.map(function(o,i){ return i; })));
+      } else if(ex.type === "dict"){
+        var t4 = el("div"); t4.appendChild(el("span","qt",(qi+1)+". ")); t4.appendChild(speaker(q.audio));
+        t4.appendChild(el("span","mark")); d.appendChild(t4);
+        var di = el("input","dictin"); di.type = "text"; di.autocomplete = "off"; di.spellcheck = false;
+        di.setAttribute("autocapitalize","off"); di.placeholder = "Viết lại câu em nghe được…";
+        di.addEventListener("input", function(){ setAns(k, di.value); });
+        d.appendChild(di);
+      } else if(ex.type === "phon"){
+        var t3 = el("div"); t3.appendChild(el("span","qt","Question "+(qi+1)+". "));
+        t3.appendChild(speaker(q.audio)); t3.appendChild(el("span","mark")); d.appendChild(t3);
+        d.appendChild(optGroup(k, q.opts.map(function(o,i){ return LET[i]+". "+o; }), q.opts.map(function(o,i){ return i; })));
+      } else if(ex.type === "gap"){
+        var line = el("div");
+        line.appendChild(el("span","qt",(qi+1)+". "));
+        if(q.label){ line.appendChild(el("b","", q.label+" ")); }
+        if(q.before){ line.appendChild(document.createTextNode(q.before+" ")); }
+        var inp = el("input","gapin"); inp.type = "text"; inp.autocomplete = "off"; inp.spellcheck = false;
+        inp.setAttribute("autocapitalize","off");
+        inp.addEventListener("input", function(){ setAns(k, inp.value); });
+        line.appendChild(inp);
+        if(q.after){ line.appendChild(document.createTextNode(" "+q.after)); }
+        line.appendChild(el("span","mark"));
+        d.appendChild(line);
+      } else {
+        var row = el("div");
+        row.appendChild(el("span","qt",(qi+1)+". "+q.text+"  "));
+        var s = el("select"); s.appendChild(new Option("– chọn –",""));
+        ex.things.forEach(function(t,i){ s.appendChild(new Option(LET[i], String(i))); });
+        s.addEventListener("change", function(){ setAns(k, s.value === "" ? undefined : Number(s.value)); });
+        row.appendChild(s); row.appendChild(el("span","mark"));
+        d.appendChild(row);
+      }
+      c.appendChild(d);
+    });
+    host.appendChild(c);
+  });
+  $("submitBtn").classList.remove("hidden");
+  $("redoWrong").classList.add("hidden"); $("redoAll").classList.add("hidden");
+  updateProgress();
+}
+function total(){ var n=0; TESTS[st.t].exercises.forEach(function(e){ n+=e.qs.length; }); return n; }
+function answered(){
+  var n=0; TESTS[st.t].exercises.forEach(function(e,ei){ e.qs.forEach(function(q,qi){
+    var v = st.ans[key(ei,qi)]; if(v!==undefined && String(v).trim()!=="") n++; }); });
+  return n;
+}
+function updateProgress(){
+  if(st.submitted) return;
+  $("progress").textContent = "Đã làm " + answered() + " / " + total() + " câu";
+}
+
+/* ---------- grading ---------- */
+var NUMW = {"0":"zero","1":"one","2":"two","3":"three","4":"four","5":"five","6":"six","7":"seven","8":"eight","9":"nine","10":"ten","11":"eleven","12":"twelve","favorite":"favourite","mom":"mum","color":"colour"};
+function words(s){
+  return String(s||"").toLowerCase().replace(/[’`]/g,"'").replace(/[.,!?;:"]/g," ").split(/ +/)
+    .filter(function(w){ return w; }).map(function(w){ return NUMW[w] || w; });
+}
+function lcsMark(u, c){         // which of the user's words appear in the right order
+  var n=u.length, m=c.length, L=[], i, j;
+  for(i=0;i<=n;i++){ L.push(new Array(m+1).fill(0)); }
+  for(i=n-1;i>=0;i--) for(j=m-1;j>=0;j--) L[i][j] = u[i]===c[j] ? L[i+1][j+1]+1 : Math.max(L[i+1][j], L[i][j+1]);
+  var ok = new Array(n).fill(false); i=0; j=0;
+  while(i<n && j<m){ if(u[i]===c[j]){ ok[i]=true; i++; j++; } else if(L[i+1][j] >= L[i][j+1]) i++; else j++; }
+  return {ok: ok, missing: m - L[0][0]};
+}
+function isRight(ex, q, v){
+  if(v === undefined || String(v).trim()==="") return false;
+  if(ex.type === "dict"){ return words(v).join(" ") === words(q.text).join(" "); }
+  if(ex.type === "gap"){ var n = norm(v); return q.accept.some(function(a){ return norm(a) === n; }); }
+  return String(v) === String(q.ans);
+}
+$("submitBtn").addEventListener("click", function(){
+  var left = total() - answered();
+  if(left > 0){
+    $("mText").textContent = "Em còn " + left + " câu chưa làm. Em có chắc muốn nộp bài không?";
+    $("modal").classList.add("show");
+  } else { grade(); }
+});
+$("mNo").addEventListener("click", function(){ $("modal").classList.remove("show"); });
+$("mYes").addEventListener("click", function(){ $("modal").classList.remove("show"); grade(); });
+
+function grade(){
+  stopAll();
+  st.submitted = true;
+  var T = TESTS[st.t], right = 0, per = [];
+  T.exercises.forEach(function(ex, ei){
+    var r = 0;
+    ex.qs.forEach(function(q, qi){
+      var k = key(ei,qi), d = $("q_"+k), ok = isRight(ex, q, st.ans[k]);
+      d.classList.remove("ok","bad"); d.classList.add(ok ? "ok" : "bad"); d.classList.add("locked");
+      d.querySelector(".mark").textContent = ok ? "✓" : "✗";
+      var gi = d.querySelector("input"); if(gi) gi.readOnly = true;
+      var gs = d.querySelector("select"); if(gs) gs.disabled = true;
+      if(ex.type === "dict"){
+        var oldf = d.querySelector(".wfb"); if(oldf) oldf.remove();
+        if(!ok){
+          var u = words(st.ans[k]), mk = lcsMark(u, words(q.text)), fb = el("div","wfb");
+          u.forEach(function(w, wi){ fb.appendChild(el("span", mk.ok[wi] ? "g" : "x", w)); });
+          if(mk.missing > 0){ fb.appendChild(el("span","m","(còn thiếu " + mk.missing + " từ)")); }
+          d.appendChild(fb);
+        }
+      }
+      if(ok){ r++; st.locked[k] = true; }
+      if(!st.locked[k] || ok){ st.tries[k] = (st.tries[k] || 0) + 1; }
+      var old = d.querySelector(".expl"); if(old && ok){ old.remove(); }
+      if(!ok && st.tries[k] >= 2 && q.expl && !d.querySelector(".expl")){
+        var x = el("div","expl");
+        var l1 = el("div"); l1.appendChild(el("b","","Đáp án đúng: ")); l1.appendChild(document.createTextNode(q.expl.ans)); x.appendChild(l1);
+        var l2 = el("div"); l2.appendChild(el("b","", ex.type === "phon" ? "Phân tích: " : (ex.type === "dict" ? "Chú ý nối âm: " : "Trong bài nghe: ")));
+        l2.appendChild(el("span","qq", ex.type === "listen" || (ex.type !== "phon" && ex.type !== "dict") ? "“" + q.expl.quote + "”" : q.expl.quote)); x.appendChild(l2);
+        if(q.expl.vi){ x.appendChild(el("div","", "💡 " + q.expl.vi)); }
+        d.appendChild(x);
+      }
+    });
+    right += r; per.push(r + "/" + ex.qs.length);
+  });
+  var score = Math.round(right / total() * 100) / 10;
+  var res = $("result"); res.innerHTML = ""; res.classList.remove("hidden");
+  res.appendChild(el("div","muted", st.name + " • Lớp " + st.cls + " • " + T.name + " • " + new Date().toLocaleString("vi-VN")));
+  res.appendChild(el("div","score", "Đúng " + right + " / " + total() + " câu  •  " + score + " điểm"));
+  var bd = el("div","breakdown");
+  per.forEach(function(p,i){ bd.appendChild(el("div","", "Bài " + (i+1) + ": " + p)); });
+  res.appendChild(bd);
+  res.appendChild(el("p","muted", right === total() ? "Xuất sắc! Em làm đúng tất cả các câu." :
+    "Câu có dấu ✓ là câu đúng. Câu có dấu ✗ là câu chưa đúng – em hãy bấm \"Làm lại câu sai\" và thử lại. Nếu làm lại vẫn sai, em sẽ được xem giải thích."));
+  $("submitBtn").classList.add("hidden");
+  $("redoWrong").classList.toggle("hidden", right === total());
+  $("redoAll").classList.remove("hidden");
+  $("progress").textContent = "Đã nộp bài: " + right + "/" + total();
+  var h = []; try{ h = JSON.parse(load("dt_listen_hist")||"[]"); }catch(err){ h=[]; }
+  h.push({date:new Date().toLocaleString("vi-VN"), name:st.name, cls:st.cls, test:T.short, right:right, total:total(), score:score});
+  store("dt_listen_hist", JSON.stringify(h.slice(-50)));
+  res.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ---------- redo ---------- */
+$("redoAll").addEventListener("click", function(){
+  st.ans = {}; st.locked = {}; st.tries = {}; st.submitted = false; render(); window.scrollTo(0,0);
+});
+$("redoWrong").addEventListener("click", function(){
+  st.submitted = false;
+  players.forEach(function(p){ p.reset(); });   // làm lại thì được nghe lại 2 lượt
+  var T = TESTS[st.t], first = null;
+  T.exercises.forEach(function(ex, ei){
+    ex.qs.forEach(function(q, qi){
+      var k = key(ei,qi), d = $("q_"+k);
+      if(st.locked[k]){ return; }             // keep correct answers
+      delete st.ans[k];
+      d.classList.remove("ok","bad","locked");
+      d.querySelector(".mark").textContent = "";
+      var ox = d.querySelector(".expl"); if(ox){ ox.remove(); }   // làm lại: ẩn giải thích để em tự thử
+      Array.prototype.forEach.call(d.querySelectorAll(".opt"), function(o){ o.classList.remove("on"); });
+      var inp = d.querySelector("input"); if(inp){ inp.readOnly = false; if(ex.type !== "dict"){ inp.value = ""; } else { st.ans[k] = inp.value; } }
+      var ofb = d.querySelector(".wfb"); if(ofb){ ofb.remove(); }
+      var s = d.querySelector("select"); if(s){ s.value = ""; s.disabled = false; }
+      if(!first) first = d;
+    });
+  });
+  $("result").classList.add("hidden");
+  $("submitBtn").classList.remove("hidden");
+  $("redoWrong").classList.add("hidden"); $("redoAll").classList.add("hidden");
+  updateProgress();
+  if(first) first.scrollIntoView({behavior:"smooth", block:"center"});
+});
+})();
+</script>
+</body>
+</html>
